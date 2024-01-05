@@ -7,7 +7,7 @@ compose = { id = "org.jetbrains.compose", version.ref = "plugin-compose" }
 
 [versions]
 
-agp = "8.2.0"
+agp = "8.2.1"
 kotlin = "1.9.20"
 android-compose-activity = "1.8.2"
 plugin-compose = "1.6.0-alpha01"
