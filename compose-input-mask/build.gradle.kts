@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,15 +8,16 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.26.0"
 }
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     applyDefaultHierarchyTemplate()
     js(IR) {
         browser()
     }
-//    wasmJs {
-//        binaries.executable()
-//        browser()
-//    }
+    wasmJs {
+        binaries.executable()
+        browser()
+    }
     jvm("desktop")
     androidTarget {
         publishLibraryVariants("release")
@@ -68,37 +70,6 @@ android {
 }
 
 mavenPublishing {
-    //publishToMavenCentral(SonatypeHost.DEFAULT)
-    // or when publishing to https://s01.oss.sonatype.org
     publishToMavenCentral(SonatypeHost.S01)
-
     signAllPublications()
-
-//    coordinates("io.github.3moly", "compose-input-mask", "0.1.2")
-//
-//    pom {
-//        name.set("compose-input-mask")
-//        description.set("kmp library for jetpack compose")
-//        inceptionYear.set("2024")
-//        url.set("https://github.com/3moly/compose-input-mask")
-//        licenses {
-//            license {
-//                name.set("MIT")
-//                url.set("https://opensource.org/licenses/MIT")
-//                //distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-//            }
-//        }
-//        developers {
-//            developer {
-//                id.set("3moly")
-//                name.set("3moly")
-//                url.set("3molydev@gmail.com")
-//            }
-//        }
-//        scm {
-//            url.set("https://github.com/3moly/compose-input-mask")
-//            connection.set("scm:git:git://github.com/3moly/compose-input-mask")
-//            developerConnection.set("scm:git:ssh://git@github.com/3moly/compose-input-mask")
-//        }
-//    }
 }
