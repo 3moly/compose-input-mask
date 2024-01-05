@@ -1,0 +1,22 @@
+[plugins]
+
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "plugin-compose" }
+
+[versions]
+
+agp = "8.2.0"
+kotlin = "1.9.20"
+android-compose-activity = "1.8.2"
+plugin-compose = "1.6.0-alpha01"
+android-appcompat = "1.6.1"
+android-core-ktx = "1.12.0"
+
+[libraries]
+
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+android-core-ktx = { module = "androidx.core:core-ktx", version.ref = "android-core-ktx" }
+android-ui-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "android-appcompat" }
+android-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "android-compose-activity" }
