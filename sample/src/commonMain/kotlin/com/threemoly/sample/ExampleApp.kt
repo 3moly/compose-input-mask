@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.threemoly.composemask.universalTransformation
+import com.threemoly.composemask.universalTransformedText
 
 @Composable
 fun ExampleTextField(
@@ -76,7 +76,7 @@ fun ExampleApp() {
             ExampleTextField(
                 singleLine = false,
                 visualTransformation = {
-                    universalTransformation(
+                    universalTransformedText(
                         it.text,
                         """Fill the field
                                             |
