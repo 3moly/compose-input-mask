@@ -33,6 +33,8 @@ fun universalTransformedText(
 
     val offsetMapping = object : OffsetMapping {
         override fun originalToTransformed(offset: Int): Int {
+            if (isShowPlaceholder)
+                return 0
             var textOffset = 0
             for (i in mask.indices) {
                 var isSpace = false
@@ -56,6 +58,8 @@ fun universalTransformedText(
         }
 
         override fun transformedToOriginal(offset: Int): Int {
+            if (isShowPlaceholder)
+                return 0
             var newOffset = 0
             if (!isShowPlaceholder) {
                 for (i in 0 until offset) {

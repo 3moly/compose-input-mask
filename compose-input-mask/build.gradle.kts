@@ -14,10 +14,10 @@ kotlin {
     js(IR) {
         browser()
     }
-    wasmJs {
-        binaries.executable()
-        browser()
-    }
+//    wasmJs {
+//        binaries.executable()
+//        browser()
+//    }
     jvm("desktop")
     androidTarget {
         publishLibraryVariants("release")
@@ -41,8 +41,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.ui)
+//            implementation(compose.runtime)
+//            implementation(compose.ui)
             implementation(compose.foundation)
             //put your multiplatform dependencies here
         }
