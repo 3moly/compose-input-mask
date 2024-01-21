@@ -6,11 +6,29 @@ plugins {
     alias(libs.plugins.compose)
 }
 
+val copyJsResources = tasks.create("copyJsResourcesWorkaround", Copy::class.java) {
+//    from(project(":compose-input-mask").file("src/commonMain/resources"))
+//    into("build/processedResources/js/main")
+}
+
+afterEvaluate {
+    project.tasks.getByName("jsProcessResources").finalizedBy(copyJsResources)
+//    project.tasks.getByName("wasmJsProcessResources").finalizedBy(copyWasmResources)
+}
+
+
 kotlin {
     applyDefaultHierarchyTemplate()
     js(IR) {
-        browser()
+        moduleName = "imageviewer"
+        browser{
+            commonWebpackConfig {
+                outputFileName = "imageviewer.js"
+            }
+        }
+        binaries.executable()
     }
+
 //    @OptIn(ExperimentalWasmDsl::class)
 //    wasmJs {
 //        binaries.executable()
@@ -68,6 +86,17 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
+        jsMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.ui)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
+            implementation(compose.html.core)
+            //implementation(compose.runtime)
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+        }
     }
 }
 
@@ -106,4 +135,10 @@ compose.desktop {
 
 compose.experimental {
     web.application {}
+}
+
+afterEvaluate {
+    rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
+        versions.webpackCli.version = "4.10.0"
+    }
 }

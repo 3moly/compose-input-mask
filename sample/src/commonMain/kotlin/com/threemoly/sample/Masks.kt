@@ -13,7 +13,7 @@ object Masks {
     )
     val DateMask = universalTransformation(
         mask = "25/09/1970",
-        maskCharsToKeep = listOf('/'),
+        maskCharToKeep = '/',
         placeholder = "date's placeholder"
     )
     val ZipCodeMask = universalTransformation(
