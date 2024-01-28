@@ -1,11 +1,14 @@
 package com.threemoly.sample
 
+import androidx.compose.ui.graphics.Color
+import com.threemoly.composemask.MaskStyle
 import com.threemoly.composemask.universalTransformation
 
 object Masks {
     val phoneCode = universalTransformation(
         mask = "(000) 000-0000",
-        maskCharsToKeep = listOf(' ', '(', ')', '-')
+        maskCharsToKeep = listOf(' ', '(', ')', '-'),
+        placeholder = "date's placeholder"
     )
     val phoneWithCountryCode = universalTransformation(
         mask = "+1 (555) 495-3947",
@@ -13,7 +16,13 @@ object Masks {
     )
     val date = universalTransformation(
         mask = "25/09/1970",
-        maskCharToKeep = '/'
+        maskCharToKeep = '/',
+        placeholder = "date's placeholder",
+        style = MaskStyle(
+            placeholderColor = Color.Magenta,
+            beforeCursorColor = Color.Green,
+            afterCursorColor = Color.Red
+        )
     )
     val zipCode = universalTransformation(
         mask = "dd/mm/yyyy",

@@ -23,10 +23,11 @@ fun ExampleTextField(
         OutlinedTextField(
             value = textFieldState.value,
             onValueChange = { newValue ->
-                textFieldState.value = newValue
+                val filteredText = newValue.text.filter { d -> d.isDigit() }.take(8)
+                textFieldState.value = newValue.copy(text = filteredText)
             },
             visualTransformation = visualTransformation,
-            singleLine = singleLine
+            singleLine = singleLine,
         )
         Row(modifier = Modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             BasicText(text = "raw value:")
