@@ -6,8 +6,8 @@ import com.threemoly.sample.ExampleApp
 
 fun main() {
     singleWindowApplication(
-        title = "sample desktop app",
-        state = WindowState(size = DpSize(400.dp, 800.dp)),
+        title = "sample",
+        state = WindowState(size = DpSize(500.dp, 500.dp)),
     ) {
         ExampleApp()
     }

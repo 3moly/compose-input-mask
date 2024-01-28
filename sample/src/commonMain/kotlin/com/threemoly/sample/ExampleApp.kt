@@ -26,10 +26,12 @@ import androidx.compose.ui.unit.dp
 fun ExampleApp() {
     val masks = remember {
         listOf(
-            Masks.DateMask,
-            Masks.PhoneCodeMask,
-            Masks.ZipCodeMask,
-            Masks.PhoneWithCountryCodeMask
+            Masks.date,
+            Masks.phoneCode,
+            Masks.zipCode,
+            Masks.phoneWithCountryCode,
+            Masks.ip,
+            Masks.creditCard,
         )
     }
     val selectedMask = remember {
@@ -45,67 +47,20 @@ fun ExampleApp() {
             ) {
                 FlowRow(modifier = Modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     for (item in masks) {
-                        Surface(modifier = Modifier, shape = RoundedCornerShape(8.dp), onClick = {
-                            selectedMask.value = item
-                        }) {
-                            Text(
-                                item.filter(AnnotatedString(" ")).text,
-                                modifier = Modifier.padding(8.dp)
-                            )
-                        }
+                        MaskOption(
+                            isSelected = selectedMask.value == item,
+                            text = item.filter(AnnotatedString("")).text,
+                            onSelected = {
+                                selectedMask.value = item
+                            })
                     }
                 }
-                if(selectedMask.value!=null){
+                if (selectedMask.value != null) {
                     ExampleTextField(
                         singleLine = true,
                         visualTransformation = selectedMask.value!!
                     )
                 }
-//                ExposedDropdownMenuBox(expanded = isExpanded.value, onExpandedChange = { expanded ->
-//                    isExpanded.value = expanded
-//                }) {
-//                    Button(onClick = {
-//                        isExpanded.value = true
-//                    }) {
-//                        Text("Oopen")
-//                    }
-//                    DropdownMenu(isExpanded.value, onDismissRequest = {
-//                        isExpanded.value = false
-//                    }) {
-//                        Text(text = "column item")
-//                    }
-//                }
-
-//                ExampleTextField(
-//                    singleLine = true,
-//                    visualTransformation = Masks.PhoneCodeMask
-//                )
-//                ExampleTextField(
-//                    singleLine = true,
-//                    visualTransformation = Masks.PhoneWithCountryCodeMask
-//                )
-//                ExampleTextField(
-//                    singleLine = true,
-//                    visualTransformation = Masks.DateMask
-//                )
-//                ExampleTextField(
-//                    singleLine = true,
-//                    visualTransformation = Masks.ZipCodeMask
-//                )
-//                ExampleTextField(
-//                    singleLine = false,
-//                    visualTransformation = {
-//                        universalTransformedText(
-//                            it.text,
-//                            """Fill the field
-//                                            |
-//                                            |
-//                                            |0000-0000
-//                                        """.trimMargin(),
-//                            listOf('-', '\n')
-//                        )
-//                    },
-//                )
             }
         }
     }
