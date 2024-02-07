@@ -24,7 +24,7 @@ class TransformedTextTest {
     @Test
     fun test_transformed_text_filled() {
         val transformedText = universalTransformedText("2233555566", birthdayMask, maskCharToKeep = '.')
-        assertEquals("22.33.5555 2123", transformedText.text.text)
+        assertEquals("22.33.5555", transformedText.text.text)
     }
 
     @Test
