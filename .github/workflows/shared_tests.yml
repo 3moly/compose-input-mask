@@ -7,8 +7,18 @@ on:
     branches : [ master ]
 
 jobs:
+  caching:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+      - run: ./gradlew build --no-daemon
   shared-desktop-tests:
     runs-on: macOS-latest
+    needs: caching
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.0
@@ -25,6 +35,7 @@ jobs:
         run: ./gradlew :compose-input-mask:desktopTest
   shared-android-tests:
     runs-on: macOS-latest
+    needs: caching
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.0
