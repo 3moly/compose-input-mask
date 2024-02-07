@@ -1,0 +1,26 @@
+name: shared_tests
+
+on:
+  pull_request :
+    branches : [ master ]
+  push :
+    branches : [ master ]
+
+jobs:
+  test-feature:
+    runs-on: macOS-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Grant execute permissions for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Tests with Gradle
+        run: ./gradlew :compose-input-mask:allTests
